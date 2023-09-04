@@ -113,13 +113,13 @@ console.log(filterAndAdd(new Set([1, 2, 3, "a", "b", "c"]), ["d", "e", "f"]));
  */
 function checkValueAndType(mySet, value) {
   // Використовуємо метод has для перевірки, чи містить множина певне значення.
-  mySet.has(value);
-  // Якщо значення знайдено, повертаємо рядок Множина має значення "${value}" типу "${typeof value}".
-  if ((mySet = "${typeof value}")) {
-    return "Множина має значення.";
+  if (mySet.has(value)) {
+    return `Множина має значення "${value}" типу "${typeof value}".`;
   } else {
-    return "Множина не має значення";
+    return `Множина не має значення "${value}".`;
   }
+  // Якщо значення знайдено, повертаємо рядок Множина має значення "${value}" типу "${typeof value}".
+
   // Якщо значення не знайдено, повертаємо рядок Множина не має значення "${value}".
 }
 // Приклад використання функції checkValueAndType
@@ -139,13 +139,13 @@ console.log(checkValueAndType(new Set([1, 2, 3, "a", "b", "c"]), "b"));
  */
 function setToArray(mySet) {
   // Конвертуємо множину в масив за допомогою деструктурізації.
-  let setToArray;
+  let arr = [...mySet];
   // Використовуємо метод filter для створення нового масиву, що містить лише рядкові елементи.
-  mySet.filter();
+  arr = arr.filter((item) => typeof item === "string");
   // Використовуємо метод sort для сортування рядкових елементів в алфавітному порядку.
-  setToArray.sort(new Set());
+  arr.sort();
   // Повертаємо оброблений масив.
-  return new Set();
+  return arr;
 }
 
 // Приклад використання функції setToArray
@@ -161,13 +161,15 @@ console.log(setToArray(new Set([1, 2, 3, "b", "a", "c"])));
  */
 function removeDuplicatesInPlace(arr) {
   // Створення множини для збереження унікальних елементів
-   const duplicates = Set();
+
   // Перебір елементів масиву за допомогою циклу for від 0 до довжини масиву
-   for (let set from "0" to arr.length) {
-    if (isElement(set)) {
-     arr.delete(element);
-     removeDuplicatesInPlace();
-     arr.add();
+  let uniqueSet = new Set();
+  for (let i = 0; i < arr.length; i++) {
+    if (uniqueSet.has(arr[i])) {
+      arr.splice(i, 1);
+      i--;
+    } else {
+      uniqueSet.add(arr[i]);
     }
   }
   // Перевірка, чи елемент вже присутній у множині
@@ -175,7 +177,7 @@ function removeDuplicatesInPlace(arr) {
   // Зменшуємо лічильник, оскільки масив став коротшим
   // Додаємо унікальний елемент до множини
   // Повертаємо множину
-   return set;
+  return uniqueSet;
 }
 
 // Приклад використання функції removeDuplicatesInPlace
@@ -194,15 +196,14 @@ console.log(removeDuplicatesInPlace([1, 2, 2, 3, 3, 4, 5, 5]));
  */
 function areDisjoint(set1, set2) {
   // Перебираємо першу множину за допомогою оператору for of
-  for (const areDisjoint of set1) {
-    if (set2.has(set1)) {
+  for (let item of set1) {
+    if (set2.has(item)) {
       return false;
-    } else {
-      return true;
     }
   }
   // Якщо знайдено спільний елемент з другою множиною,використовуємо метод has, повертаємо false
   //Якщо немає  спільних елементів повертаємо true
+  return true;
 }
 
 // Приклад використання функції areDisjoint
@@ -220,10 +221,11 @@ console.log(areDisjoint(new Set([1, 2, 3]), new Set([3, 4, 5])));
  */
 function getDifference(set1, set2) {
   // Створення множини differenceSet
-  const differenceSet = (set1, set2);
+  let differenceSet = new Set();
   // Перебір елементів першої множини за допомогою оператору for of
-  for (let difference of set1) {
-    if (!set2 === differenceSet) {
+  for (let item of set1) {
+    if (!set2.has(item)) {
+      differenceSet.add(item);
     }
   }
   // Якщо елемент не належить другій множині, додаємо його до differenceSet
@@ -246,13 +248,14 @@ console.log(getDifference(new Set([1, 2, 3, 4]), new Set([2, 3])));
  */
 function getIntersection(arr1, arr2) {
   // Створення множин з двох масивів
-  const set = (arr1, arr2);
+  let set1 = new Set(arr1);
+  let set2 = new Set(arr2);
   // Створення множини intersectionSet
-  const intersectionSet = set;
+  let intersectionSet = new Set();
   // Перебір елементів першої множини за допомогою оператору for of
-  for (const set of arr1) {
-    if (set === arr2) {
-      add.set(intersectionSet);
+  for (let item of set1) {
+    if (set2.has(item)) {
+      intersectionSet.add(item);
     }
   }
   // Перевірка, чи елемент є спільним у другій множині
@@ -274,24 +277,24 @@ console.log(getIntersection([1, 2, 3, 4], [3, 4, 5, 6]));
  */
 function iterateSet(set) {
   // Використовуємо методу keys для отримання ітератора ключів
-  set.keys(iterateSet);
+  let keys = set.keys();
   // Використовуємо for...of для кожного ключа з ітератора keys
-  for (let iterateSet of set) {
-    console.log(set);
+  for (let key of keys) {
+    console.log(key);
   }
   // Виведення ключа у консоль
   // Використовуємо методу values для отримання ітератора значень
-  set.values(iterateSet);
+  let values = set.values();
   // Використовуємо for...of для кожного значення з ітератора values
-  for (let iterator of set) {
-    console.log(set);
+  for (let value of values) {
+    console.log(value);
   }
   // Виведення значення у консоль
   // Використовуємо методу entries для отримання ітератора записів
-  set.entries(iterateSet);
+  let entries = set.entries();
   // Використовуємо for...of для кожного запису з ітератора entries
-  for (let iterator of set) {
-    console.log(set);
+  for (let entry of entries) {
+    console.log(entry);
   }
   // Виведення запису у консоль
 }
@@ -319,17 +322,18 @@ iterateSet(new Set(["a", "b", "c"]));
  */
 function sumNumbers(set) {
   // Використання методу forEach для перебору елементів множини
-  set.forEach((element) => {
-    if (element.isNumber) {
-      add.element(sum);
+  let sum = 0;
+  set.forEach((item) => {
+    if (typeof item === "number") {
+      sum += item;
+
+      // Перевірка, чи є елемент числом
+      // Додавання числового елемента до суми
+      // Повертаємо суму
     }
   });
-  // Перевірка, чи є елемент числом
-  // Додавання числового елемента до суми
-  // Повертаємо суму
-  return set;
+  return sum;
 }
-
 // Приклад використання функції sumNumbers
 console.log("Завдання: 12 ==============================");
 console.log(
